@@ -2,13 +2,7 @@ from flask import Flask, url_for, request
 
 app = Flask(__name__)
 
-
 @app.route('/')
-@app.route('/index')
-def index():
-    return "Привет, Яндекс!"
-
-
 @app.route('/form_sample', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
