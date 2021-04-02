@@ -9,5 +9,9 @@ def index(title):
     t = title
     return render_template('base.html', title=t)
 
+@app.route('/list_prof/<num>')
+def prof(num):
+    return render_template('prof.html', title='/list_prof/<num>', num=num, num2=num)
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
