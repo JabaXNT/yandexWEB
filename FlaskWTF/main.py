@@ -22,5 +22,11 @@ def index(title):
     t = title
     return render_template('base.html', title=t)
 
+@app.route('/table/<sex>/<age>')
+def cabinet(sex, age):
+    s = sex
+    a = int(age)
+    return render_template('boba.html', title='цвет каюты', sex=s, age=a)
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
