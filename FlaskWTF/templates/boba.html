@@ -1,16 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
-  }
-  td {
-  padding: 100px;
-  }
-</style>
 <h2> Оформление каюты </h2>
 <table style="width:100%">
     <tr>
@@ -20,16 +10,19 @@
     <tr>
       {% if (sex == 'female') and (age < 21) %}
         <td bgcolor='pink'></td>
-        <td> <img src=../static/img/ultraminichel.png> </td>
+        <td> <img src="{{ url_for('static', filename='img/ultraminichel1.png')}}">
+        </td>
       {% elif (sex == 'female') and (age >= 21) %}
         <td bgcolor='red'></td>
-        <td> <img src=../static/img/minichel.png> </td>
+        <td> <img src="{{ url_for('static', filename='img/minichel.png')}}"> </td>
       {% elif (sex == 'male') and (age >= 21) %}
       <td bgcolor='blue'></td>
-      <td> <img src=../static/img/minichel.png> </td>
+      <td> <img src="{{ url_for('static', filename='img/minichel.png')}}"> </td>
       {% else %}
         <td bgcolor='lightblue'></td>
-        <td> <img src=../static/img/ultraminichel.png> </td>
+        <td>     <img src="{{ url_for('static', filename='img/ultraminichel1.png')}}"
+          alt="здесь должна была быть картинка, но она на Марсе">
+        </td>
       {% endif %}
     </tr>
   </table>

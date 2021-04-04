@@ -1,6 +1,6 @@
 from flask import Flask, url_for, request, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 @app.route('/')
@@ -11,7 +11,8 @@ def desc():
 
 @app.route('/list_prof/<num>')
 def prof(num):
-    return render_template('prof.html', title='/list_prof/<num>', num=num, num2=num)
+    prof = ['инженер-исследователь', 'пилот', 'строитель', 'экзобиолог', 'врач', 'инженер по терраформированию', 'климатолог', 'специалист по радиацонной защите', 'астрогеолог', 'гляциолог']
+    return render_template('prof.html', title='/list_prof/<num>', num=num, prof=prof)
 
 @app.route('/training/<proff>')
 def training(proff):
@@ -29,4 +30,4 @@ def cabinet(sex, age):
     return render_template('boba.html', title='цвет каюты', sex=s, age=a)
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='127.0.0.1', debug=True)
