@@ -1,22 +1,24 @@
 from data import db_session
 from data.users import User
-from data.news import News
+from data.jobs import Jobs
 from forms.user import RegisterForm
 from flask import Flask, render_template, redirect
-import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
+
 @app.route("/")
 def index():
     db_sess = db_session.create_session()
-    news = db_sess.query(News).filter(News.is_private != True)
-    return render_template("index.html", news=news)
+    jobs = db_sess.query(Jobs).filter(Jobs.is_private != True)
+    return render_template("index.html", jobs=jobs)
+
 
 def main():
     db_session.global_init("db/Space.db")
 #   app.run()
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
@@ -42,20 +44,19 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
+
 if __name__ == '__main__':
     main()
 
 user = User()
 session = db_session.create_session()
-user.surname = "Scott"
-user.name = "Ridley"
-user.age = 21
-user.position = "captain"
-user.speciality = "research engineer"
-user.address = "module_1"
-user.email = "scott_chie@mars.org"
-user.hashed_password = "cap"
+user.surname = "KEkw"
+user.name = "Pepega"
+user.age = 10010
+user.position = "main"
+user.speciality = "pog"
+user.address = "module_12345"
+user.email = "rofl@mars.org"
+user.hashed_password = "main_pog"
 session.add(user)
 session.commit()
-for user in session.query(User).all():
-    print(user)

@@ -1,2 +1,2 @@
-from . import news
+from . import jobs
 from . import users

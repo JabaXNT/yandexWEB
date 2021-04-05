@@ -2,32 +2,28 @@ import datetime
 import sqlalchemy
 from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
-from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
-class User(SqlAlchemyBase):
-    __tablename__ = 'users'
+class Jobs(SqlAlchemyBase):
+    __tablename__ = 'jobs'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    surname = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    age = sqlalchemy.Column(sqlalchemy.Integer)
-    position = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    team_leader = sqlalchemy.Column(sqlalchemy.Integer, 
+                                sqlalchemy.ForeignKey("users.id"))
+    job = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    work_size = sqlalchemy.Column(sqlalchemy.Integer)
+    collaborators = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     speciality = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    address = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    email = sqlalchemy.Column(sqlalchemy.String,
-                              index=True, unique=True, nullable=True)
-    hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    modified_date = sqlalchemy.Column(sqlalchemy.DateTime,
-                                     default=datetime.datetime.now)
-    
-    def __repr__(self):
-        return f"<User> {self.name} {self.surname}"
-    
-    def set_password(self, password):
-        self.hashed_password = generate_password_hash(password)
+    end_date = sqlalchemy.Column(sqlalchemy.DateTime,
+                                 default=datetime.datetime.now)
+    start_date = sqlalchemy.Column(sqlalchemy.DateTime,
+                                   default=datetime.datetime.now)
+    is_finished = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True)
 
-    def check_password(self, password):
-        return check_password_hash(self.hashed_password, password)
+    user = orm.relation('User')
+
+    def __repr__(self):
+        return f"{self.id} {self.job} {self.work_size} {self.collaborators} \
+{self.speciality} {self.end_date} {self.start_date} {self.is_finished}"
