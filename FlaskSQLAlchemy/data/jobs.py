@@ -15,7 +15,6 @@ class Jobs(SqlAlchemyBase):
     job = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     work_size = sqlalchemy.Column(sqlalchemy.Integer)
     collaborators = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    speciality = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     end_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                  default=datetime.datetime.now)
     start_date = sqlalchemy.Column(sqlalchemy.DateTime,
